@@ -74,12 +74,31 @@ class MainActivity : AppCompatActivity() {
 
         // WebView ayarları
         webSettings.apply {
+
+            val webSettings: WebSettings = webView.settings
+            webSettings.javaScriptEnabled = true
+            webSettings.domStorageEnabled = true
+            webView.setInitialScale(1)  // Sayfayı %100 ölçekle aç
+            webView.settings.loadWithOverviewMode = true
+            webView.settings.useWideViewPort = true
+            webView.settings.javaScriptEnabled = true
+            webView.settings.domStorageEnabled = true
+            webView.evaluateJavascript(
+                "(function() { document.body.style.paddingBottom = '56px'; })();",
+                null
+            )
+            // **Ekrana tam sığdırma ayarları**
+            webSettings.useWideViewPort = true  // Sayfanın genişliği otomatik ayarlanır
+            webSettings.loadWithOverviewMode = true  // Sayfa ilk açıldığında ekran genişliğine göre ölçeklenir
+            webSettings.builtInZoomControls = true  // Yakınlaştırma kontrolleri ekler
+            webSettings.displayZoomControls = false
             javaScriptEnabled = true
             domStorageEnabled = true
             useWideViewPort = true
             loadWithOverviewMode = true
             cacheMode = WebSettings.LOAD_NO_CACHE
             setSupportMultipleWindows(true) // Yeni sekme açmayı destekle
+
         }
 
         // WebViewClient ayarla
